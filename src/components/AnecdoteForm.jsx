@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { createAnecdote } from "../reducers/anecdoteReducer";
+import { createAnecdote } from "../slices/anecdoteSlice";
+import { cleanNotification, setNotification } from "../slices/notificationSlice";
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,11 @@ const AnecdoteForm = () => {
     const content = event.target.anecdote.value.trim();
     if (content) {
       dispatch(createAnecdote(content))
-      event.target.reset();
+      event.target.reset()
+      dispatch(setNotification(`${content} be created`))
+      setTimeout(()=>{
+        dispatch(cleanNotification())
+      },5000)
     }
   };
 
