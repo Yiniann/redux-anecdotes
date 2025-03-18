@@ -2,15 +2,16 @@ import { useDispatch } from "react-redux";
 import { createAnecdote } from "../slices/anecdoteSlice";
 import { cleanNotification, setNotification } from "../slices/notificationSlice";
 
+
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
 
-  const handleCreate = (event) => {
+  const handleCreate = async(event) => {
     event.preventDefault();
     const content = event.target.anecdote.value.trim();
     if (content) {
-      dispatch(createAnecdote(content))
       event.target.reset()
+      dispatch(createAnecdote(content))
       dispatch(setNotification(`${content} be created`))
       setTimeout(()=>{
         dispatch(cleanNotification())

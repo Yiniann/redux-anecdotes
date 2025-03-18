@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { vote } from "../slices/anecdoteSlice"
+import { voteAnecdoteAsync } from "../slices/anecdoteSlice"
 import { setNotification, cleanNotification } from "../slices/notificationSlice"
 
 const AnecdoteList = () => {
@@ -13,13 +13,14 @@ const AnecdoteList = () => {
   .sort((a, b) => b.votes - a.votes)
   
   const handleVote = (id) => {
-    dispatch(vote(id))
-    dispatch(setNotification('Voting successful'))
-    setTimeout(()=> {
+    const anecdote = anecdotes.find(a => a.id === id)
+    dispatch(voteAnecdoteAsync(id))
+    dispatch(setNotification(`You voted for "${anecdote.content}"`))
+    setTimeout(() => {
       dispatch(cleanNotification())
-    },
-    5000)
+    }, 5000)
   }
+  
 
   return (
     <div>

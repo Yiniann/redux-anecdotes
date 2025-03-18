@@ -3,6 +3,7 @@ import anecdoteSlice from "./slices/anecdoteSlice"
 import notificationSlice from './slices/notificationSlice'
 import filterSlice from './slices/filterSlice'
 
+
 const store = configureStore({
   reducer: {
     anecdotes: anecdoteSlice,
@@ -10,5 +11,6 @@ const store = configureStore({
     filter : filterSlice
   },
 })
+
 
 export default store;
