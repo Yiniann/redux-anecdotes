@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { createAnecdote } from "../slices/anecdoteSlice";
-import { cleanNotification, setNotification } from "../slices/notificationSlice";
+import { showNotification } from "../slices/notificationSlice";
 
 
 const AnecdoteForm = () => {
@@ -12,10 +12,7 @@ const AnecdoteForm = () => {
     if (content) {
       event.target.reset()
       dispatch(createAnecdote(content))
-      dispatch(setNotification(`${content} be created`))
-      setTimeout(()=>{
-        dispatch(cleanNotification())
-      },5000)
+      dispatch(showNotification(`New anecdote '${content}' created`, 5))
     }
   };
 
